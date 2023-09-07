@@ -12,7 +12,6 @@ const SignUp = () => {
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
-      username: "shailendra004",
       email: "shailendratrivedi004@gmail.com",
       password: "123456",
       confirmPassword: "123456",
@@ -37,16 +36,6 @@ const SignUp = () => {
                 className="w-full flex flex-col justify-around gap-5"
               >
                 <Input
-                  id="username"
-                  type="text"
-                  label="Username"
-                  value={formik.values.username}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  error={formik.errors.username}
-                  touched={formik.touched.username}
-                />
-                <Input
                   id="email"
                   type="text"
                   label="Email"
@@ -68,7 +57,7 @@ const SignUp = () => {
                 />
                 <Input
                   id="confirmPassword"
-                  type="confirmPassword"
+                  type="password"
                   label="Confirm Password"
                   value={formik.values.confirmPassword}
                   onChange={formik.handleChange}

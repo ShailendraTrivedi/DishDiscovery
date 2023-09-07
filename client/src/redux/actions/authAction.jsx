@@ -1,6 +1,6 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 import {
-  LOGIN_AUTH_FAILURE,
   LOGIN_AUTH_REQUEST,
   LOGIN_AUTH_SUCCESS,
   REGISTER_AUTH_REQUEST,
@@ -11,22 +11,26 @@ export const loginAction = (values) => {
   return async (dispatch) => {
     dispatch({ type: LOGIN_AUTH_REQUEST });
     try {
-      console.log("values:", values);
       const response = await axios.post(
         "http://localhost:5000/foodieuser/login",
         values
       );
-      console.log(response);
       if (response.status === 200) {
-        alert("Working....");
+        toast.success("Login Successfully");
+        sessionStorage.setItem("loginUser", JSON.stringify(response.data));
+        // const data = JSON.parse(sessionStorage.getItem("loginUser"));
         dispatch({ type: LOGIN_AUTH_SUCCESS, payload: response.data });
+        setTimeout(() => {
+          window.location.reload();
+        }, 1800);
       }
     } catch (error) {
-      dispatch({ type: LOGIN_AUTH_FAILURE });
-      if (error.response && error.response.status === 404) {
-        alert("User not found !");
+      if (error.response && error.response.status === 401) {
+        toast.warning("Wrong Password !");
+      } else if (error.response && error.response.status === 404) {
+        toast.warning("User not found !");
       } else {
-        alert("Error while searching the user to the database !!!");
+        toast.error("Something went wrong !!!");
       }
     }
   };
@@ -44,14 +48,13 @@ export const registerAction = (values) => {
       console.log(response);
       if (response.status === 201) {
         dispatch({ type: REGISTER_AUTH_SUCCESS, payload: response.data });
-        alert("User Registered");
+        toast.success("Registeration Successfully");
       }
     } catch (error) {
-      dispatch({ type: REGISTER_AUTH_REQUEST });
       if (error.response && error.response.status === 400) {
-        alert("User already present !");
+        toast.warning("User already present !");
       } else {
-        alert("Something went wrong !");
+        toast.error("Something went wrong !");
       }
     }
   };

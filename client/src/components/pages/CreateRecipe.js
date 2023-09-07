@@ -2,38 +2,58 @@ import React from "react";
 import { useFormik } from "formik";
 import Button from "../../helpers/Button";
 import Input from "../../helpers/Input";
-import { PenSquare, Plus, Trash2 } from "lucide-react";
+import { Plus, Trash2 } from "lucide-react";
+import { addRecipeAction } from "../../redux/actions/recipeAction";
+import { useDispatch, useSelector } from "react-redux";
 
 const CreateRecipe = () => {
+  const dispatch = useDispatch();
+  const recipeLoading = useSelector((state) => state.addRecipeStore.loading);
+  console.log(recipeLoading);
   const formik = useFormik({
     initialValues: {
-      username: "",
-      title: "",
-      publish_date: "",
-      category: "",
-      introduction: "",
-      ingredients: [""],
-      instructions: [""],
-      images: "",
-      cooking_time: "",
+      username: "chef_maggi_lover",
+      title: "Delicious Maggi Noodles",
+      publishDate: "2023-09-02",
+      category: "Quick and Easy",
+      introduction:
+        "Enjoy the ultimate comfort food with this classic Maggi noodles recipe.",
+      ingredients: [
+        "1 packet of Maggi noodles",
+        "2 cups of water",
+        "1 tablespoon of oil",
+        "1/2 cup of mixed vegetables (carrots, peas, and corn)",
+        "1 Maggi masala seasoning packet",
+      ],
+      instructions: [
+        "Boil 2 cups of water in a pan.",
+        "Add Maggi noodles and cook for 2 minutes until they soften.",
+        "In a separate pan, heat oil and sauté the mixed vegetables until tender.",
+        "Add the Maggi masala seasoning and mix well.",
+        "Combine the cooked noodles with the vegetable mixture.",
+        "Stir-fry for a few minutes until everything is well blended.",
+        "Serve hot and enjoy your delicious Maggi noodles!",
+      ],
+      images: "maggi_image.jpg",
+      cookingTime: "15 minutes",
     },
     onSubmit: (values) => {
       // Handle form submission here
-      console.log("Form values:", values);
+      // console.log("Form values:", values);
+      dispatch(addRecipeAction(values));
     },
   });
 
   const handleDeleteIngredient = (index) => {
-    if(formik.values.ingredients.length>1){
+    if (formik.values.ingredients.length > 1) {
       const newIngredients = [...formik.values.ingredients];
       newIngredients.splice(index, 1);
       formik.setFieldValue("ingredients", newIngredients);
     }
-
   };
 
   const handleDeleteInstruction = (index) => {
-    if(formik.values.instructions.length>1){
+    if (formik.values.instructions.length > 1) {
       const newInstructions = [...formik.values.instructions];
       newInstructions.splice(index, 1);
       formik.setFieldValue("instructions", newInstructions);
@@ -76,19 +96,18 @@ const CreateRecipe = () => {
             touched={formik.touched.title}
           />
           <Input
-            id="publish_date"
+            id="publishDate"
             type="text"
             label="Publish Date"
-
-            value={formik.values.publish_date}
+            value={formik.values.publishDate}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            error={formik.errors.publish_date}
-            touched={formik.touched.publish_date}
+            error={formik.errors.publishDate}
+            touched={formik.touched.publishDate}
           />
           <Input
             id="category"
-            type="text" 
+            type="text"
             label="Category"
             value={formik.values.category}
             onChange={formik.handleChange}
@@ -107,14 +126,14 @@ const CreateRecipe = () => {
             touched={formik.touched.introduction}
           />
           <Input
-            id="cooking_time"
+            id="cookingTime"
             type="text"
             label="Cooking Time"
-            value={formik.values.cooking_time}
+            value={formik.values.cookingTime}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            error={formik.errors.cooking_time}
-            touched={formik.touched.cooking_time}
+            error={formik.errors.cookingTime}
+            touched={formik.touched.cookingTime}
           />
         </div>
         <div className="flex flex-col gap-10">

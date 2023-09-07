@@ -1,24 +1,30 @@
 const UserModel = require("./../modals/UserSchema");
-const { generateAuthToken } = require("../middlewares/authentication");
-const bcrypt = require("bcrypt"); 
+const {
+  generateAuthToken,
+  verifyAuthToken,
+} = require("../middlewares/authentication");
+const bcrypt = require("bcrypt");
+const { v4: uuidv4 } = require("uuid");
 
+const generateShortUUID = () => {
+  const fullUUID = uuidv4();
+  const digitsOnly = fullUUID.replace(/\D/g, "");
+  const shortUUID = digitsOnly.substring(0, 6);
+  return shortUUID;
+};
 
 /** http://localhost:5000/foodieuser/register */
 const UserRegister = async (req, res) => {
   try {
-    const { email, username, password } = req.body;
-
+    const { email, password } = req.body;
     const userWithEmail = await UserModel.findOne({ email });
-    const userWithUsername = await UserModel.findOne({ username });
+    const username = `${email.split("@")[0]}#${generateShortUUID()}`;
 
     if (userWithEmail) {
-      return res.status(400).json({ message: "User Email already exists" });
-    } else if (userWithUsername) {
-      return res.status(400).json({ message: "Username already exists" });
+      return res.status(400).json({ message: "User already exists" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-
     const newUser = new UserModel({
       email,
       username,
@@ -27,7 +33,7 @@ const UserRegister = async (req, res) => {
 
     await newUser.save();
 
-    return res.status(201).json({ message: "User Registered" });
+    return res.status(201).json({ message: "User Registered", user: newUser });
   } catch (err) {
     return res.status(500).json({ message: "Something went wrong" });
   }
@@ -43,18 +49,20 @@ const UserLogin = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "No User Found" });
     }
-
     const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch) {
       return res.status(401).json({ message: "Incorrect Password" });
     }
 
-    const token = generateAuthToken(user);
+    const userObject = user.toObject();
+    delete userObject.password;
 
-    res.status(200).json({ token });
+    res.status(200).json(userObject);
   } catch (error) {
-    res.status(500).json({ error: "Error while searching the user in the database" });
+    res
+      .status(500)
+      .json({ error: "Error while searching the user in the database" });
   }
 };
 

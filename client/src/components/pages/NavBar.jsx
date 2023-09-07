@@ -6,6 +6,10 @@ const NavBar = ({ isAuthenticated }) => {
   // const isAuthenticated = prop.isAuthenticated;
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
+  const handleLogout = () => {
+    sessionStorage.clear();
+    window.location.reload();
+  };
   return (
     <div className="w-full h-[4rem]">
       <div className="fixed top-0 w-full h-[4rem] p-2 px-20 flex justify-between items-center bg-white border-b-2 z-10">
@@ -27,7 +31,9 @@ const NavBar = ({ isAuthenticated }) => {
               <Link to="/myCookbook">My Cookbook</Link>
               <Link to="/createRecipe">Create Recipe</Link>
               <Link>Account</Link>
-              <Link>Logout</Link>
+              <div className="cursor-pointer" onClick={handleLogout}>
+                Logout
+              </div>
             </>
           ) : (
             <>

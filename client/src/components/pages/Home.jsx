@@ -47,14 +47,14 @@ const Home = () => {
       <div className="flex justify-center">
         <div className="flex flex-col w-[90%] p-10 gap-10">
           {footerHomeData.map((category, i) => (
-            <div className="flex flex-col gap-5">
+            <div key={i} className="flex flex-col gap-5">
               <header className="text-3xl font-bold flex justify-center items-center gap-2 text-orange-500">
                 {category.name}
                 <MoveRight />
               </header>
               <section className="grid grid-cols-3 gap-5">
                 {category.recipes.map((item, j) => (
-                  <div>
+                  <div key={j}>
                     <img src={Allo_Parathe} alt="" className=" object-cover" />
                     <div className="text-center text-lg font-bold w-full">
                       {item.name}

@@ -5,9 +5,10 @@ const { SECRET_KEY } = require("../constant");
 const generateAuthToken = (user) => {
   const payload = {
     _id: user._id,
+    username: user.username,
     email: user.email,
   };
-  return jwt.sign(payload, SECRET_KEY, { expiresIn: "1h" }); // You can adjust the expiration time as needed
+  return jwt.sign(payload, SECRET_KEY, { expiresIn: "1h" });
 };
 
 // Function to verify and decode a JWT token

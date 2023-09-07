@@ -4,12 +4,14 @@ const RecipeModel = require("../modals/RecipeSchema");
 /** GET: http://localhost:5000/foodieblog/add-blog */
 const AddRecipe = async (req, res) => {
   try {
-    const blog = req.body;
-    const newBlog = new RecipeModel(blog);
-    await newBlog.save();
+    const recipe = req.body;
+    const newRecipe = new RecipeModel(recipe);
+    const result = await newRecipe.save();
     return res.status(200).json({ message: "Blog Added Successfully" });
   } catch (err) {
-    return res.status(400).json({ message: "Something went wrong" });
+    return res
+      .status(500)
+      .json({ message: "Something went wrong", error: err });
   }
 };
 
@@ -17,27 +19,34 @@ const AddRecipe = async (req, res) => {
 const getUserRecipe = async (req, res) => {
   try {
     const username = req.params.id;
-    const all_blogs = await RecipeModel.find({ username: username });
-    if (all_blogs.length === 0) {
-      return res.status(400).json({ message: "No Blog Found" });
-    } else {
-      return res.status(200).send(all_blogs);
+    const userRecipes = await RecipeModel.find({ username });
+
+    if (!userRecipes || userRecipes.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No Recipes Found for this User" });
     }
+
+    return res.status(200).json(userRecipes);
   } catch (err) {
-    return res.status(400).json({ message: "Something went wrong" });
+    console.error(err);
+    return res.status(500).json({ message: "Something went wrong" });
   }
 };
 
 /** GET: http://localhost:5000/foodieblog/get-all-recipe */
 const getAllRecipe = async (req, res) => {
   try {
-    const allRecipe = await RecipeModel.find();
-    if (!allRecipe) {
-      return res.status(404).send({ error: "No Reipe Found !" });
+    const allRecipes = await RecipeModel.find();
+
+    if (!allRecipes || allRecipes.length === 0) {
+      return res.status(404).send({ error: "No Recipe Found!" });
     }
-    return res.send(allRecipe);
+
+    return res.status(200).json(allRecipes);
   } catch (error) {
-    return res.status(500).send("error: Somthing went Wrong !");
+    console.error(error);
+    return res.status(500).send({ error: "Something went wrong!" });
   }
 };
 
@@ -45,18 +54,22 @@ const getAllRecipe = async (req, res) => {
 const getAllRecipeByCategory = async (req, res) => {
   try {
     const { category } = req.params;
-    const allRecipeCategory = await RecipeModel.find({ category });
+    const allRecipeCategory = await Recipe.find({ category });
+    if (!allRecipeCategory || allRecipeCategory.length === 0) {
+      return res
+        .status(404)
+        .send({ error: "No recipes found for this category." });
+    }
     return res.status(200).send(allRecipeCategory);
   } catch (error) {
+    console.error(error);
     return res.status(500).send({ error: "Something went wrong!" });
   }
 };
-
-
 
 module.exports = {
   AddRecipe,
   getUserRecipe,
   getAllRecipe,
-  getAllRecipeByCategory
+  getAllRecipeByCategory,
 };
