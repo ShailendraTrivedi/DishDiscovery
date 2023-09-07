@@ -1,5 +1,5 @@
 .main_auth_css {
-  @apply bg-[url("../../assets/Auth/BackGround.jpg")] bg-cover bg-center bg-no-repeat;
+  @apply bg-[url("../../assets/Auth_Img/BackGround.jpg")] bg-cover bg-center bg-no-repeat;
   @apply h-screen container overflow-y-hidden;
 }
 

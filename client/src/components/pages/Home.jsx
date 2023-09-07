@@ -1,16 +1,22 @@
 import React from "react";
-
-import Home_Side_BG from "../../assets/Home/Home_Side_BG.jpg";
-import { headerHomeData } from "../data/HomeData";
+import "../styles/styles_home.css";
+import Home_Side_BG from "../../assets/Home_Img/Home_Side_BG.jpg";
+import Allo_Parathe from "../../assets/Home_Img/allo_parate.jpg";
+import { footerHomeData, headerHomeData } from "../data/HomeData";
+import { MoveRight } from "lucide-react";
+import Loading from "../../helpers/Loading";
 const Home = () => {
   return (
     <>
+      {/* <Loading/>  */}
+      {/* Header Part */}
       <div className="grid grid-cols-2">
-        <div className="relative">
+        {/* Left Header Part */}
+        <div className="relative overflow-hidden">
           <img
             src={Home_Side_BG}
             alt=""
-            className="object-cover h-screen w-full"
+            className="object-cover h-screen w-full "
           />
           <div className="absolute w-[30rem] h-[15rem] bg-white top-[15rem] left-[8%] p-5 opacity-90">
             <div className="border-2 border-orange-500 flex flex-col w-full h-full items-center gap-5 p-10">
@@ -25,18 +31,42 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-5 p-10 overflow-y-scroll h-screen w-full">
+        {/* Right Header Part */}
+        <div className="rightSidePart_css">
           {headerHomeData.map((item, i) => (
             <div key={i} className="border-2 border-orange-500 p-1 h-[12rem]">
-              <div className="border-2 border-orange-500 w-full h-full flex flex-col gap-2 justify-around py-5 px-2 items-center">
-                <span className="font-bold">{item.recipeName}</span>
+              <div className="border-2 border-orange-500 w-full h-full flex flex-col gap-2 justify-around py-5 px-2 items-center overflow-hidden">
+                <span className="font-bold text-lg">{item.recipeName}</span>
                 <p className="text-center">{item.description}</p>
               </div>
             </div>
           ))}
         </div>
       </div>
-      <div>asdmfnk</div>
+      {/* Footer Part */}
+      <div className="flex justify-center">
+        <div className="flex flex-col w-[90%] p-10 gap-10">
+          {footerHomeData.map((category, i) => (
+            <div className="flex flex-col gap-5">
+              <header className="text-3xl font-bold flex justify-center items-center gap-2 text-orange-500">
+                {category.name}
+                <MoveRight />
+              </header>
+              <section className="grid grid-cols-3 gap-5">
+                {category.recipes.map((item, j) => (
+                  <div>
+                    <img src={Allo_Parathe} alt="" className=" object-cover" />
+                    <div className="text-center text-lg font-bold w-full">
+                      {item.name}
+                    </div>
+                    <p className="text-center">{item.description}</p>
+                  </div>
+                ))}
+              </section>
+            </div>
+          ))}
+        </div>
+      </div>
     </>
   );
 };

@@ -6,17 +6,23 @@ import EmailVerification from "../components/auth/forget_password/EmailVerificat
 import OtpVerification from "../components/auth/forget_password/OtpVerification";
 import ChangePassword from "../components/auth/forget_password/ChangePassword";
 import Home from "../components/pages/Home";
+import NotFound from "../helpers/NotFound";
+import CreateRecipe from "../components/pages/CreateRecipe";
+import MyCookbook from "../components/pages/MyCookbook";
+import DiscoveryRecipe from "../components/pages/DiscoveryRecipe";
 
-const isAuthenticated = false;
-const Routers = () => {
+const Routers = ({ isAuthenticated }) => {
   return (
     <>
       {isAuthenticated ? (
         <>
           <Routes>
-            <Route path="/" element={<>Home</>} />
+            <Route path="/" element={<Home />} />
+            <Route path="/createRecipe" element={<CreateRecipe />} />
             <Route path="/about_us" element={<DashBoard />} />
-            <Route path="/*" element={<>Shailendra</>} />
+            <Route path="/myCookbook" element={<MyCookbook />} />
+            <Route path="/discoveryRecipe" element={<DiscoveryRecipe />} />
+            <Route path="/*" element={<NotFound />} />
           </Routes>
         </>
       ) : (
@@ -33,14 +39,7 @@ const Routers = () => {
               path="/forget_password"
               element={<div className="text-5xl">Forget Password</div>}
             />
-            <Route
-              path="/*"
-              element={
-                <>
-                  <div className="text-3xl">Not Found</div>
-                </>
-              }
-            />
+            <Route path="/*" element={<NotFound />} />
           </Routes>
         </>
       )}

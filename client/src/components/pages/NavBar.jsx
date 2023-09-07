@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "../../helpers/Button";
 
-const NavBar = () => {
-  // const isAuthenticated = true;
+const NavBar = ({ isAuthenticated }) => {
+  // const isAuthenticated = prop.isAuthenticated;
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
   return (
@@ -21,10 +21,24 @@ const NavBar = () => {
           <Link to="/">
             <span className="">Home</span>
           </Link>
-          <span className="">Discover</span>
-          <Link to="/signin">
-            <Button className="border-2 border-orange-500" buttonName="Login" />
-          </Link>
+          <Link to="/discoveryRecipe">Discover</Link>
+          {isAuthenticated ? (
+            <>
+              <Link to="/myCookbook">My Cookbook</Link>
+              <Link to="/createRecipe">Create Recipe</Link>
+              <Link>Account</Link>
+              <Link>Logout</Link>
+            </>
+          ) : (
+            <>
+              <Link to="/signin">
+                <Button
+                  className="border-2 border-orange-500"
+                  buttonName="Login"
+                />
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </div>

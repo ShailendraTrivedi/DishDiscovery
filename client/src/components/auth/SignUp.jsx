@@ -5,18 +5,22 @@ import { useFormik } from "formik";
 import "./auth.css";
 import { registerSchema } from "../../schemas/AuthSchema";
 import Input from "../../helpers/Input";
+import { useDispatch } from "react-redux";
+import { registerAction } from "../../redux/actions/authAction";
 
 const SignUp = () => {
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
-      username: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
+      username: "shailendra004",
+      email: "shailendratrivedi004@gmail.com",
+      password: "123456",
+      confirmPassword: "123456",
     },
     validationSchema: registerSchema,
     onSubmit: (values) => {
-      console.log(values);
+      // console.log(values);
+      dispatch(registerAction(values));
     },
   });
   return (

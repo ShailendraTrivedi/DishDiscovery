@@ -7,16 +7,20 @@ import { loginSchema } from "../../schemas/AuthSchema";
 import { Link } from "react-router-dom";
 import Input from "../../helpers/Input";
 import Button from "../../helpers/Button";
+import { useDispatch } from "react-redux";
+import { loginAction } from "../../redux/actions/authAction";
 
 const SignIn = () => {
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      email: "shailendratrivedi004@gmail.com",
+      password: "123456",
     },
     validationSchema: loginSchema,
     onSubmit: (values) => {
-      console.log(values);
+      // console.log(values);
+      dispatch(loginAction(values));
     },
   });
 
@@ -25,7 +29,7 @@ const SignIn = () => {
       <div className="main_auth_css">
         <div className="contianer_auth_css">
           <div className="box_auth_css">
-            <header className="flex flex-col items-center gap-10 p-10">
+            <header className="flex flex-col items-center gap-10 py-10 px-5">
               <div className="text-[24px] font-bold text-orange-500">
                 Welcome to DishDicovery !
               </div>

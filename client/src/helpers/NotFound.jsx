@@ -1,13 +1,9 @@
 // NotFound.jsx
-
+import PageNotFound from "../assets/Helper_Img/PageNotFound.jpg"
 const NotFound = () => {
   return (
     <>
-      <div className="min-h-screen h-screen">
-        <div className="w-full h-full flex justify-center items-center text-5xl">
-          :( 404 ~ Page Not Found
-        </div>
-      </div>
+      <img src={PageNotFound} alt="" className="h-screen mx-auto object-cover" />
     </>
   );
 };

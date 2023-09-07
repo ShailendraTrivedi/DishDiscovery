@@ -1,6 +1,15 @@
 import React from "react";
-import "./helper.css"
-const Input = ({ id, type, value, onChange, onBlur,label, error, touched }) => {
+import "./helper.css";
+const Input = ({
+  id,
+  type,
+  value,
+  onChange,
+  onBlur,
+  label,
+  error,
+  touched,
+}) => {
   return (
     <div className="relative">
       <input
