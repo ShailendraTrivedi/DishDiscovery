@@ -19,6 +19,7 @@ const AddRecipe = async (req, res) => {
 const getUserRecipe = async (req, res) => {
   try {
     const username = req.params.id;
+    console.log(username);
     const userRecipes = await RecipeModel.find({ username });
 
     if (!userRecipes || userRecipes.length === 0) {

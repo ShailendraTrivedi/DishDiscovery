@@ -13,13 +13,14 @@ import { getUserRecipeAction } from "../../redux/actions/recipeAction";
 import Noodles from "../../assets/noodles_bowl.png";
 
 const MyCookbook = () => {
-  const dispatch = useDispatch();
+    const dispatch = useDispatch();
   const recipeData = useSelector(
     (state) => state.getUserRecipeStore.userRecipe
   );
+  const data = JSON.parse(sessionStorage.getItem("loginUser")).username;
   useEffect(() => {
-    dispatch(getUserRecipeAction("shailendra"));
-  }, [dispatch]);
+    dispatch(getUserRecipeAction(data));
+  }, [dispatch,data]);
 
   return (
     <div className="container">
@@ -69,7 +70,7 @@ const MyCookbook = () => {
                 <div className="flex justify-center items-center">
                   <img src={Noodles} alt="" className="object-cover h-20 w-20 p-2" />
                 </div>
-                <div className="flex justify-center items-center col-span-2">{recipe.title}</div>
+<div className="flex justify-center items-center col-span-2">{recipe.title}</div>
                 <div className="flex justify-center items-center">{recipe.publishDate}</div>
                 <div className="flex justify-center items-center">{recipe.category}</div>
                 <div className="flex justify-center items-center">{recipe.cookingTime}</div>

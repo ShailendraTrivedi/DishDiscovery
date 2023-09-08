@@ -30,6 +30,7 @@ const Routers = ({ isAuthenticated }) => {
             <Route path="/" element={<Home />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/discoveryRecipe" element={<DiscoveryRecipe />} />
             <Route path="/emailVerification" element={<EmailVerification />} />
             <Route path="/otpVerification" element={<OtpVerification />} />
             <Route path="/changePassword" element={<ChangePassword />} />

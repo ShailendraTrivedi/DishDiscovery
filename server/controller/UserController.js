@@ -18,7 +18,7 @@ const UserRegister = async (req, res) => {
   try {
     const { email, password } = req.body;
     const userWithEmail = await UserModel.findOne({ email });
-    const username = `${email.split("@")[0]}#${generateShortUUID()}`;
+    const username = `${email.split("@")[0]}_${generateShortUUID()}`;
 
     if (userWithEmail) {
       return res.status(400).json({ message: "User already exists" });

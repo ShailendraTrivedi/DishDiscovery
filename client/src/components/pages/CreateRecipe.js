@@ -7,12 +7,12 @@ import { addRecipeAction } from "../../redux/actions/recipeAction";
 import { useDispatch, useSelector } from "react-redux";
 
 const CreateRecipe = () => {
+  const loginUser = JSON.parse(sessionStorage.getItem("loginUser")).username;
   const dispatch = useDispatch();
   const recipeLoading = useSelector((state) => state.addRecipeStore.loading);
-  console.log(recipeLoading);
+  const data = JSON.parse(sessionStorage.getItem("loginUser")).username;
   const formik = useFormik({
     initialValues: {
-      username: "chef_maggi_lover",
       title: "Delicious Maggi Noodles",
       publishDate: "2023-09-02",
       category: "Quick and Easy",
@@ -40,7 +40,7 @@ const CreateRecipe = () => {
     onSubmit: (values) => {
       // Handle form submission here
       // console.log("Form values:", values);
-      dispatch(addRecipeAction(values));
+      dispatch(addRecipeAction({...values,username: data}));
     },
   });
 
@@ -75,16 +75,6 @@ const CreateRecipe = () => {
         onSubmit={formik.handleSubmit}
       >
         <div className="flex flex-col gap-4">
-          <Input
-            id="username"
-            type="text"
-            label="Username"
-            value={formik.values.username}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={formik.errors.username}
-            touched={formik.touched.username}
-          />
           <Input
             id="title"
             type="text"
