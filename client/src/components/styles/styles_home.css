@@ -1,13 +1,16 @@
 .rightSidePart_css {
-  @apply grid grid-cols-2 gap-5 p-10 overflow-y-auto h-screen w-full;
+  @apply grid grid-cols-2 gap-5 p-10 h-screen w-full;
   scrollbar-width: none;
 }
+.scroll{
+  @apply overflow-y-auto
+}
 
-.rightSidePart_css::-webkit-scrollbar {
+.scroll::-webkit-scrollbar {
   width: 0.4rem;
 }
 
-.rightSidePart_css::-webkit-scrollbar-thumb {
+.scroll::-webkit-scrollbar-thumb {
   background-color: transparent;
 }
 .rightSideImage_css {

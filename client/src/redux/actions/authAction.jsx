@@ -7,7 +7,7 @@ import {
   REGISTER_AUTH_SUCCESS,
 } from "../constant";
 
-export const loginAction = (values) => {
+export const loginAction = (values,navigate) => {
   return async (dispatch) => {
     dispatch({ type: LOGIN_AUTH_REQUEST });
     try {
@@ -16,13 +16,13 @@ export const loginAction = (values) => {
         values
       );
       if (response.status === 200) {
-        toast.success("Login Successfully");
         sessionStorage.setItem("loginUser", JSON.stringify(response.data));
         // const data = JSON.parse(sessionStorage.getItem("loginUser"));
         dispatch({ type: LOGIN_AUTH_SUCCESS, payload: response.data });
+        toast.success("Login Successfully");
         setTimeout(() => {
           window.location.reload();
-        }, 1800);
+        }, 2000);
       }
     } catch (error) {
       if (error.response && error.response.status === 401) {

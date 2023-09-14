@@ -1,11 +1,11 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "../../helpers/Button";
 import LOGO from "../../assets/Logo_Img/Dish Discovery-logos_transparent.png";
 
 const NavBar = ({ isAuthenticated }) => {
   // const isAuthenticated = prop.isAuthenticated;
-  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  // const [isDropdownOpen, setDropdownOpen] = useState(false);
 
   const handleLogout = () => {
     sessionStorage.clear();
@@ -28,7 +28,6 @@ const NavBar = ({ isAuthenticated }) => {
             <>
               <Link to="/myCookbook">My Cookbook</Link>
               <Link to="/createRecipe">Create Recipe</Link>
-              <Link>Account</Link>
               <div className="cursor-pointer" onClick={handleLogout}>
                 Logout
               </div>

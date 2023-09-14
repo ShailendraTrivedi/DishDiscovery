@@ -4,12 +4,11 @@ import Button from "../../helpers/Button";
 import Input from "../../helpers/Input";
 import { Plus, Trash2 } from "lucide-react";
 import { addRecipeAction } from "../../redux/actions/recipeAction";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const CreateRecipe = () => {
-  const loginUser = JSON.parse(sessionStorage.getItem("loginUser")).username;
   const dispatch = useDispatch();
-  const recipeLoading = useSelector((state) => state.addRecipeStore.loading);
+  // const recipeLoading = useSelector((state) => state.addRecipeStore.loading);
   const data = JSON.parse(sessionStorage.getItem("loginUser")).username;
   const formik = useFormik({
     initialValues: {

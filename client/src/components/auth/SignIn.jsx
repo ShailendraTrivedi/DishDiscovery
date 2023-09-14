@@ -4,13 +4,14 @@ import { useFormik } from "formik";
 /** Styling */
 import "./auth.css";
 import { loginSchema } from "../../schemas/AuthSchema";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Input from "../../helpers/Input";
 import Button from "../../helpers/Button";
 import { useDispatch } from "react-redux";
 import { loginAction } from "../../redux/actions/authAction";
 
 const SignIn = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -20,7 +21,7 @@ const SignIn = () => {
     validationSchema: loginSchema,
     onSubmit: (values) => {
       // console.log(values);
-      dispatch(loginAction(values));
+      dispatch(loginAction(values,navigate));
     },
   });
 

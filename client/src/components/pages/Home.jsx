@@ -32,7 +32,7 @@ const Home = () => {
           </div>
         </div>
         {/* Right Header Part */}
-        <div className="rightSidePart_css">
+        <div className="rightSidePart_css scroll">
           {headerHomeData.map((item, i) => (
             <div key={i} className="border-2 border-orange-500 p-1 h-[12rem]">
               <div className="border-2 border-orange-500 w-full h-full flex flex-col gap-2 justify-around py-5 px-2 items-center overflow-hidden">
