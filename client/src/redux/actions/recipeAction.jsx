@@ -37,7 +37,7 @@ const getUserRecipeAction = (id) => {
       const response = await axios.get(
         `http://localhost:5000/foodieblog/get-user-blogs/${id}`
       );
-            if (response.status === 200) {
+      if (response.status === 200) {
         dispatch({
           type: GET_ALL_RECIPE_BY_ID_SUCCESS,
           payload: response.data,
@@ -45,7 +45,7 @@ const getUserRecipeAction = (id) => {
       }
     } catch (error) {
       if (error.response && error.response.status === 404) {
-        toast.warning("No Recipe Found!");
+        
       } else {
         toast.error("Something went wrong!");
       }

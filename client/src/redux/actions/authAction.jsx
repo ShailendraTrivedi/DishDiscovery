@@ -37,7 +37,6 @@ export const loginAction = (values,navigate) => {
 };
 
 export const registerAction = (values) => {
-  console.log(values);
   return async (dispatch) => {
     dispatch({ type: REGISTER_AUTH_REQUEST });
     try {
@@ -51,6 +50,7 @@ export const registerAction = (values) => {
         toast.success("Registeration Successfully");
       }
     } catch (error) {
+      console.log(error.response);
       if (error.response && error.response.status === 400) {
         toast.warning("User already present !");
       } else {

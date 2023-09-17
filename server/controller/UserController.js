@@ -18,26 +18,33 @@ const UserRegister = async (req, res) => {
   try {
     const { email, password } = req.body;
     const userWithEmail = await UserModel.findOne({ email });
-    const username = `${email.split("@")[0]}_${generateShortUUID()}`;
 
     if (userWithEmail) {
       return res.status(400).json({ message: "User already exists" });
     }
 
+    const username = `${email.split("@")[0]}_${generateShortUUID()}`;
     const hashedPassword = await bcrypt.hash(password, 10);
+
     const newUser = new UserModel({
       email,
       username,
       password: hashedPassword,
     });
 
-    await newUser.save();
-
-    return res.status(201).json({ message: "User Registered", user: newUser });
+    const result = await newUser.save();
+    
+    if (result) {
+      return res.status(201).json({ message: "User Registered", user: newUser });
+    } else {
+      return res.status(500).json({ message: "User registration failed" });
+    }
   } catch (err) {
+    console.error(err); // Log the error for debugging purposes
     return res.status(500).json({ message: "Something went wrong" });
   }
 };
+
 
 /** http://localhost:5000/foodieuser/login */
 const UserLogin = async (req, res) => {

@@ -12,34 +12,19 @@ const CreateRecipe = () => {
   const data = JSON.parse(sessionStorage.getItem("loginUser")).username;
   const formik = useFormik({
     initialValues: {
-      title: "Delicious Maggi Noodles",
-      publishDate: "2023-09-02",
-      category: "Quick and Easy",
-      introduction:
-        "Enjoy the ultimate comfort food with this classic Maggi noodles recipe.",
-      ingredients: [
-        "1 packet of Maggi noodles",
-        "2 cups of water",
-        "1 tablespoon of oil",
-        "1/2 cup of mixed vegetables (carrots, peas, and corn)",
-        "1 Maggi masala seasoning packet",
-      ],
-      instructions: [
-        "Boil 2 cups of water in a pan.",
-        "Add Maggi noodles and cook for 2 minutes until they soften.",
-        "In a separate pan, heat oil and sauté the mixed vegetables until tender.",
-        "Add the Maggi masala seasoning and mix well.",
-        "Combine the cooked noodles with the vegetable mixture.",
-        "Stir-fry for a few minutes until everything is well blended.",
-        "Serve hot and enjoy your delicious Maggi noodles!",
-      ],
+      title: "",
+      publishDate: "",
+      category: "",
+      introduction: "",
+      ingredients: [],
+      instructions: [],
       images: "maggi_image.jpg",
-      cookingTime: "15 minutes",
+      cookingTime: "",
     },
     onSubmit: (values) => {
       // Handle form submission here
       // console.log("Form values:", values);
-      dispatch(addRecipeAction({...values,username: data}));
+      dispatch(addRecipeAction({ ...values, username: data }));
     },
   });
 

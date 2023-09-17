@@ -1,7 +1,6 @@
 import React from "react";
 import "../styles/styles_home.css";
 import Home_Side_BG from "../../assets/Home_Img/Home_Side_BG.jpg";
-import Allo_Parathe from "../../assets/Home_Img/allo_parate.jpg";
 import { footerHomeData, headerHomeData } from "../data/HomeData";
 import { MoveRight } from "lucide-react";
 import Loading from "../../helpers/Loading";
@@ -55,7 +54,7 @@ const Home = () => {
               <section className="grid grid-cols-3 gap-5">
                 {category.recipes.map((item, j) => (
                   <div key={j}>
-                    <img src={Allo_Parathe} alt="" className=" object-cover" />
+                    <img src={item.image} alt="" className="object-cover" />
                     <div className="text-center text-lg font-bold w-full">
                       {item.name}
                     </div>

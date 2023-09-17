@@ -13,6 +13,6 @@ const RecipeRoutes = require("./Routes/RecipeRoutes");
 app.use("/foodieuser", UserRoutes);
 app.use("/foodieblog", RecipeRoutes);
 
-app.listen(APP_PORT, () => {
+app.listen(APP_PORT || 5000, () => {
   console.log(`Server is started on PORT: http://localhost:${APP_PORT}`);
 });

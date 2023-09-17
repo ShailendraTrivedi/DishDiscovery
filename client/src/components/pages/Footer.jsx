@@ -116,7 +116,7 @@ const Footer = () => {
     >
       © 2023 Copyright:
       <a className="text-whitehite" href="https://tailwind-elements.com/">
-        Tailwind Elements
+        DishDiscovery
       </a>
     </div>
   </footer>

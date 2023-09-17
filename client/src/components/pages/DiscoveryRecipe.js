@@ -4,6 +4,13 @@ import Noodles from "../../assets/noodles_bowl.png";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllRecipeAction } from "../../redux/actions/recipeAction";
 import DescribeRecipe from "./DescribeRecipe";
+import Breakfast from "../../assets/Dicovery_Img/Breakfast.png";
+import Lunch from "../../assets/Dicovery_Img/Lunch.png";
+import Dinner from "../../assets/Dicovery_Img/Dinner.png";
+import Drink from "../../assets/Dicovery_Img/ColdDrink.png";
+import Snack from "../../assets/Dicovery_Img/Snack.png";
+import IceCream from "../../assets/Dicovery_Img/IceCream.png";
+import More from "../../assets/Dicovery_Img/More.png";
 
 const DiscoveryRecipe = () => {
   const dispatch = useDispatch();
@@ -23,12 +30,17 @@ const DiscoveryRecipe = () => {
   };
   const handleDescription = (recipe) => {
     setRecipeDescription(recipe);
-    handleDescribe()
+    handleDescribe();
   };
 
   return (
     <>
-      {descibe && <DescribeRecipe recipeDescription={recipeDescription} handleDescribe={handleDescribe}/>}
+      {descibe && (
+        <DescribeRecipe
+          recipeDescription={recipeDescription}
+          handleDescribe={handleDescribe}
+        />
+      )}
       <div className="text-lg flex flex-col gap-2 p-5">
         <h1 className="text-5xl text-orange-500 font-bold text-center">
           Discover Delicious Recipes!
@@ -53,65 +65,57 @@ const DiscoveryRecipe = () => {
           <div className="flex gap-5">
             <div className="flex flex-col items-center">
               <img
-                src={Noodles}
+                src={Breakfast}
                 alt="Welcome"
-                className="rounded-full object-cover h-[8rem] w-[8rem]"
+                className="rounded-full border-2 border-orange-500 object-cover h-[8rem] w-[8rem]"
               />
               <span>Breakfast</span>
             </div>
             <div className="flex flex-col items-center">
               <img
-                src={Noodles}
+                src={Lunch}
                 alt="Welcome"
-                className="rounded-full object-cover h-[8rem] w-[8rem]"
+                className="rounded-full border-2 border-orange-500 object-cover h-[8rem] w-[8rem]"
               />
               <span>Lunch</span>
             </div>
             <div className="flex flex-col items-center">
               <img
-                src={Noodles}
+                src={Dinner}
                 alt="Welcome"
-                className="rounded-full object-cover h-[8rem] w-[8rem]"
+                className="rounded-full border-2 border-orange-500 object-cover h-[8rem] w-[8rem]"
               />
               <span>Dinner</span>
             </div>
             <div className="flex flex-col items-center">
               <img
-                src={Noodles}
+                src={Drink}
                 alt="Welcome"
-                className="rounded-full object-cover h-[8rem] w-[8rem]"
-              />
-              <span>Dessert</span>
-            </div>
-            <div className="flex flex-col items-center">
-              <img
-                src={Noodles}
-                alt="Welcome"
-                className="rounded-full object-cover h-[8rem] w-[8rem]"
+                className="rounded-full border-2 border-orange-500 object-cover h-[8rem] w-[8rem]"
               />
               <span>Drink</span>
             </div>
             <div className="flex flex-col items-center">
               <img
-                src={Noodles}
+                src={Snack}
                 alt="Welcome"
-                className="rounded-full object-cover h-[8rem] w-[8rem]"
+                className="rounded-full border-2 border-orange-500 object-cover h-[8rem] w-[8rem]"
               />
               <span>Snack</span>
             </div>
             <div className="flex flex-col items-center">
               <img
-                src={Noodles}
+                src={IceCream}
                 alt="Welcome"
-                className="rounded-full object-cover h-[8rem] w-[8rem]"
+                className="rounded-full border-2 border-orange-500 object-cover h-[8rem] w-[8rem]"
               />
               <span>Ice Cream</span>
             </div>
             <div className="flex flex-col items-center">
               <img
-                src={Noodles}
+                src={More}
                 alt="Welcome"
-                className="rounded-full object-cover h-[8rem] w-[8rem]"
+                className="rounded-full border-2 border-orange-500 object-cover h-[8rem] w-[8rem]"
               />
               <span>More</span>
             </div>
@@ -124,11 +128,11 @@ const DiscoveryRecipe = () => {
                 <div
                   key={i}
                   onClick={() => handleDescription(recipe)}
-                  className="group relative flex flex-row rounded-xl w-[20rem] pt-[5rem]"
+                  className="relative flex flex-row rounded-xl w-[20rem] pt-[5rem]"
                 >
-                  <div className="absolute top-0 left-[5rem] border-2 border-orange-500 bg-white h-[10rem] w-[10rem] rounded-full transform group-hover:rotate-180 transition-transform duration-1000">
+                  <div className="absolute top-0 left-[5rem] border-2 border-orange-500 bg-white h-[10rem] w-[10rem] rounded-full">
                     <img
-                      src={Noodles}
+                      src={recipe.images[0]}
                       alt="Welcome"
                       className="h-full w-full rounded-full"
                     />

@@ -10,7 +10,7 @@ const DescribeRecipe = ({ recipeDescription, handleDescribe }) => {
     introduction,
     instructions,
     ingredients,
-    image,
+    images,
     cookingTime,
     category,
     likes,
@@ -43,7 +43,7 @@ const DescribeRecipe = ({ recipeDescription, handleDescribe }) => {
                   </div>
                 </div>
                 <div>
-                  <img src={Noodles} alt="" />
+                  <img src={images[0]} alt="" />
                 </div>
               </div>
               <div className="text-center font-bold text-lg px-5">
